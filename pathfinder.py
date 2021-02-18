@@ -19,12 +19,14 @@ def get_dimensions(file_contents):
     return len(entire_text), len(entire_text[0].split())
 
 
-def get_min_elevation(file_contents):
-    return min(min(file_contents).split())
+def get_min_elevation(file):
+    with open(file, 'r') as test_file:
+        return min(test_file.read().split())
 
 
-def get_max_elevation(file_contents):
-    return max(max(file_contents).split())
+def get_max_elevation(file):
+    with open(file, 'r') as test_file:
+        return max(test_file.read().split())
 
 
 # returns tuple of 3 integers representing the same color value i.e. (100,100,100)
@@ -35,28 +37,23 @@ def get_color_value(elevation, minimum, maximum):
     return (int(result), int(result), int(result))
 
 
-def create_picture():
-    file_contents = open_file(LARGE_MOUNTAIN)
+def create_picture(file):
+    file_contents = open_file(file)
     dimensions = get_dimensions(file_contents)
     im = Image.new("RGBA", (dimensions))
-    minimum = get_min_elevation(file_contents)
-    maximum = get_max_elevation(file_contents)
-    elevation = 20000
+    minimum = get_min_elevation(file)
+    maximum = get_max_elevation(file)
 
     for x in range(dimensions[0]):
         for y in range(dimensions[1]):
             im.putpixel((x, y), get_color_value(
                 file_contents[x].split()[y], minimum, maximum))
 
-    im.save('testPixels.png')
-
-    print(im.getpixel((0, 0)))
-    print("the second value of the text file (should be 4710) ",
-          file_contents[0].split()[1])
+    im.save(file[0:len(file)-4] + '.png')
 
 
 # method for testing logic
-def fuck_around_method(color_value):
+def f_around_method(color_value):
     im = Image.new("RGBA", (100, 100))
 
     print(im.getpixel((0, 0)))
@@ -70,4 +67,5 @@ def fuck_around_method(color_value):
             im.putpixel((x, y), (100, 100, 100))
 
 
-create_picture()
+create_picture(SMALL_MOUNTAIN)
+create_picture(LARGE_MOUNTAIN)
