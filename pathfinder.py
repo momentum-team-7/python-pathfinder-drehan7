@@ -56,7 +56,7 @@ def create_picture():
 
 
 # method for testing logic
-def fuck_around_method(color_value):
+def f_around_method(color_value):
     im = Image.new("RGBA", (100, 100))
 
     print(im.getpixel((0, 0)))
