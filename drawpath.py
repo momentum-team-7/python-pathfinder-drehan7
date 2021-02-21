@@ -3,9 +3,9 @@ from PIL import Image
 
 from pathfinder import open_file, get_min_and_max_elevation
 
-mountain_image = Image.open('600_mountain.png')
+mountain_image = Image.open('1201_mountain.png')
 
-elevation_array = open_file('elevation_small.txt')
+elevation_array = open_file('elevation_large.txt')
 
 
 def get_elevation(elevation_array, coord):
@@ -25,7 +25,7 @@ def draw_best_line(image, path):
     for coord in path:
         image.putpixel((coord[0], coord[1]), (0, 255, 0))
 
-    image.save("best_path.png")
+    image.save("best_path_large.png")
 
 # return list of coordinates to draw in later
 
